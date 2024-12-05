@@ -1,12 +1,12 @@
 import React from "react";
 import Drawer from "./Drawer";
-
+import Link from "next/link";
 const Navbar = () => {
   return (
     <nav className="sticky z-50 top-0 bg-black text-white  sm:px-4 py-3 flex gap-x-2 items-center justify-between">
       <div className="flex  ms-4 sm:ms-6  items-center ">
           <Drawer />
-        <p className="mx-2 ms-4"> Blush Shop</p>
+        <Link href={`/`} className="mx-2 ms-4"> Blush Shop</Link>
       </div>
       <div className="flex mx-2 ">
         <button className="mx-2 hover:text-gray-300">
@@ -34,7 +34,7 @@ const Navbar = () => {
           </svg>
         </button>
 
-        <button className="bg-white hover:bg-gray-300 rounded-full text-black px-3 py-1 mx-2">
+        <Link href={`/auth`} className="bg-white hover:bg-gray-300 rounded-full text-black px-3 py-1 mx-2">
           Login
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -48,10 +48,12 @@ const Navbar = () => {
               clipRule="evenodd"
             />
           </svg>
-        </button>
+        </Link>
       </div>
     </nav>
   );
 };
 
 export default Navbar;
+
+
