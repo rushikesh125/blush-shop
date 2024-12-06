@@ -7,7 +7,7 @@ const AddToCartBtn = ({itemId}) => {
     }
   return (
     <button
-      className="text-white bg-black font-medium rounded-lg text-sm px-4 py-2"
+      className=" bg-pink-500 text-white font-semibold  rounded-md text-sm px-6 py-3"
       onClick={handleAddToCart}
     >
       Add to cart

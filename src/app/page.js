@@ -1,5 +1,6 @@
 // import Image from "next/image";
 import AddToCartBtn from "@/components/AddToCartBtn";
+import CategoryArea from "@/components/CategoryArea";
 import ProductCard from "@/components/ProductCard";
 import { bannerImg } from "@/utils/constants";
 import Link from "next/link";
@@ -15,16 +16,8 @@ export default async function Home() {
   return (
     <>
       {/* <div className="text-center">Hello World</div> */}
-      <div className="Category-options  gap-x-8 hidden md:flex justify-center mt-5 py-5">
-        <Link href={`/`} className="hover:text-pink-400">All Products</Link>
-        <Link href={`/`} className="hover:text-pink-400">Top</Link>
-        <Link href={`/`} className="hover:text-pink-400">Pant</Link>
-        <Link href={`/`} className="hover:text-pink-400">Dress</Link>
-        <Link href={`/`} className="hover:text-pink-400">Coord set</Link>
-        <Link href={`/`} className="hover:text-pink-400">Bundles</Link>
-        <Link href={`/`} className="hover:text-pink-400">Under ₹499</Link>
-      </div>
-      <div className="px-5 md:px-10 lg:px-20 pb-10">
+      <CategoryArea/>
+      <div className="px-5 py-5 md:px-10 lg:px-20 md:pb-10">
         <div className="poster-area w-full">
           <img src={bannerImg} alt="banner-img" className="w-full object-cover" /> 
         </div>

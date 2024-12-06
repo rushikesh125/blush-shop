@@ -1,9 +1,10 @@
-"use client";
+
+import Link from "next/link";
 import React from "react";
 
 const ProductCard = () => {
   return (
-    <div className=" w-1/2 md:w-1/5">
+    <Link href={`/product/1`} className=" w-1/2 md:w-1/5">
       <div className="overflow-hidden">
         <img
           src="https://museoutfitters.in/wp-content/uploads/2024/12/IMG_5405-1536x1536.png"
@@ -17,7 +18,7 @@ const ProductCard = () => {
         </h5>
         <p>$ 1,499.00</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

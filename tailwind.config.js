@@ -11,7 +11,10 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      
     },
   },
-  plugins: [],
+  plugins: [
+    require("tailwind-scrollbar-hide"), // Add this plugin
+  ],
 };
