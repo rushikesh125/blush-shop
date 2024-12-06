@@ -12,21 +12,6 @@ const Drawer = () => {
     <div>
       {/* Button to open drawer */}
       <button className="mt-1" type="button" onClick={toggleDrawer}>
-        {/* <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-8"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-            />
-          </svg> */}
-
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -44,14 +29,14 @@ const Drawer = () => {
       {/* Drawer component */}
       <div
         id="drawer-navigation"
-        className={`fixed top-0 left-0 z-50 h-screen p-4 overflow-y-auto transition-transform ${
+        className={`fixed top-0 left-0 z-50 h-screen p-4 overflow-y-auto transition-transform border border-r border-black/[0.20] ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        }  w-64 bg-black text-white`}
+        } w-64 bg-white text-black`}
         tabIndex="-1"
       >
         <h5
           id="drawer-navigation-label"
-          className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"
+          className="text-base font-semibold uppercase"
         >
           Menu
         </h5>
@@ -59,7 +44,7 @@ const Drawer = () => {
           type="button"
           onClick={toggleDrawer}
           aria-controls="drawer-navigation"
-          className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white"
+          className="bg-transparent rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center hover:bg-pink-200"
         >
           <svg
             className="w-3 h-3"
@@ -84,10 +69,48 @@ const Drawer = () => {
             <li>
               <a
                 href="#"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 rounded-lg group hover:bg-gray-100"
               >
                 <svg
-                  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className=" w-5 h-5 text-pink-400 hover:text-pink-700 transition duration-75 group-hover:text-pink-400"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+
+                <span className="ms-3">My Account</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center p-2 rounded-lg group hover:bg-gray-100"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className=" w-5 h-5 text-pink-400 hover:text-pink-700 transition duration-75 group-hover:text-pink-400"
+                >
+                  <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                </svg>
+
+                <span className="ms-3 ">Favorite</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center p-2 rounded-lg group hover:bg-gray-100"
+              >
+                <svg
+                  className=" w-5 h-5 text-pink-400 hover:text-pink-700 transition duration-75 group-hover:text-pink-400"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -98,81 +121,6 @@ const Drawer = () => {
                 </svg>
                 <span className="ms-3">Dashboard</span>
               </a>
-            </li>
-
-            {/* Dropdown for E-commerce */}
-            <li>
-              <button
-                type="button"
-                className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                aria-controls="dropdown-example"
-                onClick={() => setIsOpen(!isOpen)} // Toggle sub-menu
-              >
-                {/* <svg
-                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 18 21"
-                >
-                  <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
-                </svg> */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="size-6 flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                >
-                  <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
-                </svg>
-                <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
-                  E-commerce
-                </span>
-                <svg
-                  className="w-3 h-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 10 6"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 4 4 4-4"
-                  />
-                </svg>
-              </button>
-              <ul
-                id="dropdown-example"
-                className={`py-2 space-y-2 ${isOpen ? "block" : "hidden"}`}
-              >
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                  >
-                    Products
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                  >
-                    Billing
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                  >
-                    Invoice
-                  </a>
-                </li>
-              </ul>
             </li>
 
             {/* More items... */}
