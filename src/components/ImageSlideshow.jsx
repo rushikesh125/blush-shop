@@ -55,7 +55,7 @@ const ImageSlideshow = ({ images }) => {
             alt={`Preview ${index}`}
             onClick={() => setCurrentIndex(index)}
             className={`w-16 h-16 object-cover rounded-md cursor-pointer ${
-              currentIndex === index ? "bg-pink-500 ring-gray-800" : ""
+              currentIndex === index ? "bg-accent-color-dark ring-gray-800" : ""
             }`}
           />
         ))}

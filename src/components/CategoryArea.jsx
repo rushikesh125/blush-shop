@@ -6,13 +6,13 @@ const CategoryArea = () => {
   return (
     <>
     <div className="Category-options  gap-x-8 hidden md:flex justify-center mt-5 py-5">
-        <Link href={`/`} className="hover:text-pink-400">All Products</Link>
-        <Link href={`/`} className="hover:text-pink-400">Top</Link>
-        <Link href={`/`} className="hover:text-pink-400">Pant</Link>
-        <Link href={`/`} className="hover:text-pink-400">Dress</Link>
-        <Link href={`/`} className="hover:text-pink-400">Coord set</Link>
-        <Link href={`/`} className="hover:text-pink-400">Bundles</Link>
-        <Link href={`/`} className="hover:text-pink-400">Under ₹499</Link>
+        <Link href={`/`} className="hover:text-accent-color">All Products</Link>
+        <Link href={`/`} className="hover:text-accent-color">Top</Link>
+        <Link href={`/`} className="hover:text-accent-color">Pant</Link>
+        <Link href={`/`} className="hover:text-accent-color">Dress</Link>
+        <Link href={`/`} className="hover:text-accent-color">Coord set</Link>
+        <Link href={`/`} className="hover:text-accent-color">Bundles</Link>
+        <Link href={`/`} className="hover:text-accent-color">Under ₹499</Link>
       </div>
     </>
   )
