@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const Drawer = ({username}) => {
+const Drawer = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDrawer = () => {

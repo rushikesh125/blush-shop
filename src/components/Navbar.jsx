@@ -25,7 +25,7 @@ const Navbar = () => {
           // photoURL: user.photoURL,
         };
         console.log(userData);
-        router.back();
+        // router.back();
         dispatch(setUser(userData));
       } else {
         dispatch(clearUser());

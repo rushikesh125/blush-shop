@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
 import ReduxProvider from "@/components/ReduxProvider";
+import NavbarWrapper from "@/components/NavbarWrapper";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -26,7 +27,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <ReduxProvider>
         <body className="min-h-screen overflow-x-hidden">
-          <Navbar />
+          <NavbarWrapper/>
           <main className="min-h-screen">{children}</main>
           <Toaster />
           <Footer />

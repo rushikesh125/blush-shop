@@ -1,18 +1,12 @@
-// import Image from "next/image";
-import AddToCartBtn from "@/components/AddToCartBtn";
+
 import CategoryArea from "@/components/CategoryArea";
 import ProductCard from "@/components/ProductCard";
 import { bannerImg } from "@/utils/constants";
-import Link from "next/link";
-const fetchProducts = async (url) => {
-  const response = await fetch(url);
-  const productsData = response.json();
-  return productsData;
-};
+import { getProducts } from "@/utils/firebase/products/read_server";
 export default async function Home() {
-  const products = await fetchProducts("https://fakestoreapi.com/products");
-  // console.log(products);
-
+  const docs = await getProducts();
+  // console.log(docs);
+  
   return (
     <>
       {/* <div className="text-center">Hello World</div> */}
@@ -24,15 +18,9 @@ export default async function Home() {
         <div className="my-10 md:my-20">
           <h1 className="text-center text-2xl">New Arrival</h1>
           <div className="flex flex-wrap justify-evenly py-5  gap-y-2 md:gap-x-2 md:gap-y-6">
-          <ProductCard/>
-          <ProductCard/>
-          <ProductCard/>
-          <ProductCard/>
-          <ProductCard/>
-          <ProductCard/>
-          <ProductCard/>
-          <ProductCard/>
+         
           
+           {docs?.map((item)=><ProductCard key={item.id} {...item}/>)}
           
           </div>
         </div>
