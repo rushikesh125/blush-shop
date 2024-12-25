@@ -7,7 +7,7 @@ export const updateAdmin = async (data) => {
     throw new Error("Admin Name is required");
   }
   if (!data.adminEmail) {
-    throw new Error("Admin Slug is required");
+    throw new Error("Admin Email is required");
   }
   if(!data.id){
     throw new Error("ID is Required")

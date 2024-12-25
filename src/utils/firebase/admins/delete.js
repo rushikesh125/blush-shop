@@ -13,11 +13,11 @@ export const deleteAdmin = async ({ id }) => {
     const docRef = doc(db, "admins", id);
     await deleteDoc(docRef); // Delete the document
     
-    toast.success("Category deleted successfully");
+    toast.success("Admin deleted successfully");
     return "deleted";
   } catch (error) {
     console.error("Error deleting document:", error);
-    toast.error("Failed to delete category");
+    toast.error("Failed to delete Admin");
     return "error";
   }
 };
