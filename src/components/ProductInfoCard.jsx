@@ -17,7 +17,6 @@ const ProductInfoCard = ({ id, productname, price, colors, description, sizes })
       setProductQuantity(productQuantity - 1);
     }
   };
-
   return (
     <div className="p-4 mt-4 border-t border-b border-black/[0.10] mx-2 md:mx-10 sm:flex bg-white">
       {/* Image Slideshow */}
@@ -29,24 +28,24 @@ const ProductInfoCard = ({ id, productname, price, colors, description, sizes })
       <div className="w-full sm:w-1/2 p-4 sm:flex flex-col justify-center">
         <h3 className="font-semibold text-3xl my-2">{productname}</h3>
         <p className="text-gray-700 my-2">{description}</p>
-        <p className="text-2xl my-2">${price}</p>
+        <p className="text-2xl my-2">&#8377;{price}</p>
 
         {/* Color Selection */}
         <div className="my-2">
           <span className="font-medium">Color:</span>
           <div className="flex gap-2 mt-2">
-            {colors.map((colorObj) => (
-              <button
-                key={colorObj.color}
-                className={`px-2 py-1 rounded-md text-xs  border ${
-                  selectedColor === colorObj.color
-                    ? "bg-black text-white border-black"
-                    : "bg-gray-200 text-black border-gray-300"
-                }`}
-                onClick={() => setSelectedColor(colorObj.color)}
-              >
-                {colorObj.color}
-              </button>
+            {colors.map((colorObj,index) => (
+              (colorObj.color !== "f")?<button
+              key={index}
+              className={`px-2 py-1 rounded-md text-xs  border ${
+                selectedColor === colorObj.color
+                  ? "bg-black text-white border-black"
+                  : "bg-gray-200 text-black border-gray-300"
+              }`}
+              onClick={() => setSelectedColor(colorObj.color)}
+            >
+              {colorObj.color }
+            </button>:""
             ))}
           </div>
         </div>
@@ -73,7 +72,7 @@ const ProductInfoCard = ({ id, productname, price, colors, description, sizes })
 
         {/* Stock Status */}
         <div>
-          <span className="bg-yellow-200 px-2 py-0 text-gray-700 font-semibold inline-block rounded-sm">
+          <span className="bg-yellow-100 px-2 py-0 text-yellow-500 font-semibold inline-block rounded-md">
             in Stock
           </span>
         </div>

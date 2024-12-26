@@ -17,7 +17,7 @@ const ProductCard = ({colors,id,price,productname}) => {
         <h5 className="font-semibold text-gray-600">
           {productname}
         </h5>
-        <p>$ {price}</p>
+        <p>&#8377; {price}</p>
       </div>
     </Link>
   );

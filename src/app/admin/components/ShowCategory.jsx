@@ -9,7 +9,6 @@ import toast from "react-hot-toast";
 import { deleteCategory } from "@/utils/firebase/categories/delete";
 import { useRouter } from "next/navigation";
 const ShowCategory = () => {
-  
   const { data: categories, error, isLoading } = useCategories();
   // console.log(categories);
   if (isLoading) {
@@ -31,7 +30,7 @@ const ShowCategory = () => {
               <td className="p-1 border-b text-center">Actions</td>
             </tr>
             {categories?.map((item, index) => (
-              <CategoryRow item={item} index={index} key={index}/>
+              <CategoryRow item={item} index={index} key={index} />
             ))}
           </tbody>
         </table>
@@ -44,22 +43,21 @@ export default ShowCategory;
 
 const CategoryRow = ({ item, index }) => {
   const router = useRouter();
-  const [isLoading,setIsLoading] = useState(false);
-  const handleDelete = async()=>{
+  const [isLoading, setIsLoading] = useState(false);
+  const handleDelete = async () => {
     try {
       // console.log('item',item.id);
-      if(confirm("are you sure")){
-
-        const res  = await deleteCategory({id:`${item?.id}`})
+      if (confirm("are you sure")) {
+        const res = await deleteCategory({ id: `${item?.id}` });
         // console.log(res);
       }
     } catch (error) {
-      toast.error(error?.message)
+      toast.error(error?.message);
     }
-  }
-  const handleUpdate = ()=>{
-    router.push(`/admin/categories?id=${item?.id}`)
-  }
+  };
+  const handleUpdate = () => {
+    router.push(`/admin/categories?id=${item?.id}`);
+  };
   return (
     <>
       {
@@ -69,8 +67,13 @@ const CategoryRow = ({ item, index }) => {
           <td className="p-1  border-b">{item?.categorySlug}</td>
           <td className="p-1  border-b ">
             <div className="w-full flex justify-evenly">
-             <CustomBtn2 onClick={handleUpdate}> <EditIcon className="text-green-500 cursor-pointer" /></CustomBtn2>
-              <CustomBtn2 onClick={handleDelete} isLoading={isLoading}><TrashIcon className="text-red-500  cursor-pointer" /></CustomBtn2>
+              <CustomBtn2 onClick={handleUpdate} className={`bg-slate-100 hover:bg-slate-200 p-2 rounded-md mx-1`}>
+                
+                <EditIcon className="text-green-500 cursor-pointer" />
+              </CustomBtn2>
+              <CustomBtn2 onClick={handleDelete} isLoading={isLoading} className={`bg-slate-100 hover:bg-slate-200 p-2 rounded-md mx-1`}>
+                <TrashIcon className="text-red-500  cursor-pointer" />
+              </CustomBtn2>
             </div>
           </td>
         </tr>

@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { useAdmins } from "@/utils/firebase/admins/read";
 import { deleteAdmin } from "@/utils/firebase/admins/delete";
 const ShowAdmin = () => {
-  
   const { data: admins, error, isLoading } = useAdmins();
   // console.log(admins);
   if (isLoading) {
@@ -30,7 +29,7 @@ const ShowAdmin = () => {
               <td className="p-1 border-b text-center">Actions</td>
             </tr>
             {admins?.map((item, index) => (
-              <AdminRow item={item} index={index} key={index}/>
+              <AdminRow item={item} index={index} key={index} />
             ))}
           </tbody>
         </table>
@@ -43,22 +42,21 @@ export default ShowAdmin;
 
 const AdminRow = ({ item, index }) => {
   const router = useRouter();
-  const [isLoading,setIsLoading] = useState(false);
-  const handleDelete = async()=>{
+  const [isLoading, setIsLoading] = useState(false);
+  const handleDelete = async () => {
     try {
       // console.log('item',item.id);
-      if(confirm("are you sure")){
-
-        const res  = await deleteAdmin({id:`${item?.id}`})
+      if (confirm("are you sure")) {
+        const res = await deleteAdmin({ id: `${item?.id}` });
         // console.log(res);
       }
     } catch (error) {
-      toast.error(error?.message)
+      toast.error(error?.message);
     }
-  }
-  const handleUpdate = ()=>{
-    router.push(`/admin/admins?id=${item?.id}`)
-  }
+  };
+  const handleUpdate = () => {
+    router.push(`/admin/admins?id=${item?.id}`);
+  };
   return (
     <>
       {
@@ -73,8 +71,16 @@ const AdminRow = ({ item, index }) => {
           {/* <td className="p-1  border-b">{item?.categorySlug}</td> */}
           <td className="p-1  border-b ">
             <div className="w-full flex justify-evenly">
-             <CustomBtn2 onClick={handleUpdate}> <EditIcon className="text-green-500 cursor-pointer" /></CustomBtn2>
-              <CustomBtn2 onClick={handleDelete} isLoading={isLoading}><TrashIcon className="text-red-500  cursor-pointer" /></CustomBtn2>
+              <CustomBtn2
+                onClick={handleUpdate}
+                className={`bg-slate-100 hover:bg-slate-200 p-2 rounded-md mx-1`}
+              >
+                {" "}
+                <EditIcon className="text-green-500 cursor-pointer" />
+              </CustomBtn2>
+              <CustomBtn2 onClick={handleDelete} isLoading={isLoading} className={`bg-slate-100 hover:bg-slate-200 p-2 rounded-md mx-1`}>
+                <TrashIcon className="text-red-500  cursor-pointer" />
+              </CustomBtn2>
             </div>
           </td>
         </tr>

@@ -1,11 +1,12 @@
 import Link from "next/link";
 import React from "react";
+import ShowProducts from "../components/ShowProducts";
 
 const ProductsPage = () => {
   return (
     <>
       <div>
-        <div className="flex items-center justify-between bg-white p-2">
+        <div className="flex items-center justify-between bg-white p-2 rounded-md">
           <div>Products</div>
           <Link
             href={"/admin/products/form"}
@@ -13,6 +14,9 @@ const ProductsPage = () => {
           >
             Create +
           </Link>
+        </div>
+        <div className="relative max-w-full mt-4 bg-white rounded-md overflow-x-hidden">
+          <ShowProducts/>
         </div>
       </div>
     </>
