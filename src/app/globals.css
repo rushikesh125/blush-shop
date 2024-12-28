@@ -22,6 +22,16 @@
   font-weight: normal;
   font-style: normal;
 }
+/* Add this if not already defined */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
 
 body {
   font-family: 'YourFontName', sans-serif;

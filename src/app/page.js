@@ -1,15 +1,22 @@
 import CategoryArea from "@/components/CategoryArea";
 import ProductCard from "@/components/ProductCard";
+import CaretUpIcon from "@/components/SvgIcons/CaretUpIcon";
 import { bannerImg } from "@/utils/constants";
-import { getProducts } from "@/utils/firebase/products/read_server";
+import {  getProductsByCategoryName } from "@/utils/firebase/products/read_server";
+import { scrollToTop } from "@/utils/utils";
 export default async function Home() {
-  const docs = await getProducts();
+  const docs = await getProductsByCategoryName({catName:"new Arrived"});
   // console.log(docs);
+  console.log();
+  
 
   return (
     <>
       {/* <div className="text-center">Hello World</div> */}
-      <CategoryArea />
+      <div className=" w-full ">
+        <CategoryArea />
+      </div>
+      <CaretUpIcon />
       <div className="px-5 py-5 md:px-10 lg:px-20 md:pb-10">
         <div className="poster-area w-full">
           <img

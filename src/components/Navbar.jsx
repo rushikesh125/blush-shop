@@ -16,7 +16,7 @@ const Navbar = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.user);
-  console.log("USER DETAILS", userDetails);
+  // console.log("USER DETAILS", userDetails);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -26,7 +26,7 @@ const Navbar = () => {
           email: user.email,
           photoURL: user.photoURL,
         };
-        console.log(userData);
+        // console.log(userData);
         
         dispatch(setUser(userData));
         // const baseUrl = window.location.origin; // Current domain
