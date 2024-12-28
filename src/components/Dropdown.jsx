@@ -5,7 +5,7 @@ import { signOut } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "@/utils/firebase/firebase";
 import toast from "react-hot-toast";
-const Dropdown = ({ username }) => {
+const Dropdown = ({ username,photoURL }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -55,7 +55,7 @@ const Dropdown = ({ username }) => {
       {isOpen && (
         <div
           id="dropdownDivider"
-          className="absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 mt-2"
+          className="absolute z-10 right-0 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 mt-2"
         >
           <ul
             className="py-2 text-sm text-black"

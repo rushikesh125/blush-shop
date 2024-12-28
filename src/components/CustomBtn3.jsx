@@ -1,8 +1,9 @@
 import React from 'react'
 
-const CustomBtn2 = ({children,isLoading,onClick,className}) => {
+const CustomBtn3 = ({children,isLoading,onClick,className}) => {
     return (
         <button
+        
           onClick={onClick}
           disabled={isLoading}
           className={`${className} flex justify-center items-center 
@@ -12,16 +13,9 @@ const CustomBtn2 = ({children,isLoading,onClick,className}) => {
                 : ""
             }`}
         >
-          {isLoading ? (
-            "Loading..."
-          ) : (
-            <>
-            {children}
-            </>
-            
-          )}
+         {children}
         </button>
       );
 }
 
-export default CustomBtn2
+export default CustomBtn3

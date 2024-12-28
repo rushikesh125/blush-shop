@@ -10,6 +10,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useSelector } from "react-redux";
 import Dropdown from "./Dropdown";
 import { useRouter } from "next/navigation";
+import UserDropdown from "./UserDropdown";
+import { redirectURL, RedirectURL } from "@/utils/constants";
 const Navbar = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -22,11 +24,18 @@ const Navbar = () => {
           uid: user.uid,
           displayName: user.displayName,
           email: user.email,
-          // photoURL: user.photoURL,
+          photoURL: user.photoURL,
         };
         console.log(userData);
-        // router.back();
+        
         dispatch(setUser(userData));
+        // const baseUrl = window.location.origin; // Current domain
+        // const referrer = document.referrer; // Previous page URL
+    
+        // if (referrer && referrer.startsWith(baseUrl)) {
+        //   // If the previous page is within the same domain, redirect back
+        //   router.back();
+        // } 
       } else {
         dispatch(clearUser());
       }
@@ -82,7 +91,8 @@ const Navbar = () => {
 
         {userDetails ? (
           <>
-            <Dropdown username={userDetails.displayName}/>
+            {/* <Dropdown username={userDetails.displayName}/> */}
+            <UserDropdown username={userDetails?.displayName} userEamil={userDetails?.email} userPhotoURL={userDetails?.photoURL}/>
           </>
         ) : (
           <>

@@ -1,10 +1,20 @@
 "use client";
 import SignInWithGoogle from "@/components/SignInWithGoogle";
-import SignInWithGoogleBtn from "@/components/SignInWithGoogleBtn";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const Login = () => {
+  const router = useRouter();
+  const userDetails = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (userDetails) {
+      router.back();
+    }
+  }, [userDetails, router]); // Redirect if `userDetails` exists
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-md shadow-md w-full max-w-sm">
@@ -46,7 +56,7 @@ const Login = () => {
         </div>
 
         <div className="mt-6">
-          <SignInWithGoogle/>
+          <SignInWithGoogle />
         </div>
       </div>
     </div>
@@ -54,5 +64,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
