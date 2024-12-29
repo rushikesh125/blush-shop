@@ -8,9 +8,9 @@ import ProductCard from "@/components/ProductCard";
 const ProductPage = async ({ params }) => {
   const {id} = await params;
   const productData = await getProduct(id);
-  console.log('productdAta:',productData);
+  // console.log('productdAta:',productData);
   const relatedProducts = await getProductsByCategoriesName({catArray:productData?.category})
-  console.log('relatedProducts:',relatedProducts);
+  // console.log('relatedProducts:',relatedProducts);
   // const productInfo = await fetchProductInfo(productId);
   // console.log(productInfo);
   // if (!productInfo.success) {

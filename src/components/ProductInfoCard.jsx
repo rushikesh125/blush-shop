@@ -4,6 +4,7 @@ import AddToCartBtn from "./AddToCartBtn";
 import ImageSlideshow from "@/components/ImageSlideshow";
 import CustomBtn2 from "./CustomBtn2";
 import HeartIcon from "./SvgIcons/HeartIcon";
+import FavoriteBtn from "./FavoriteBtn";
 
 const ProductInfoCard = ({
   id,
@@ -120,11 +121,7 @@ const ProductInfoCard = ({
             <button className="text-sm rounded-md px-6 py-3 bg-black text-white">
               Buy Now
             </button>
-            <CustomBtn2
-              className={`p-2 text-pink-400 flex items-center justify-center border-2 border-pink-400 rounded-full hover:bg-pink-400 hover:text-white`}
-            >
-              <HeartIcon className={` `} />
-            </CustomBtn2>
+            <FavoriteBtn productId={id}/>
           </div>
         </div>
       </div>

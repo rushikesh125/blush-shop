@@ -3,10 +3,12 @@ import { signOut } from "firebase/auth";
 import React, { useState, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import UserIcon from "./SvgIcons/UserIcon";
+import Link from "next/link";
 
 const UserDropdown = ({username,userEamil,userPhotoURL}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState("right-0"); // Default position
+  const [imgSrc,setImgSrc] = useState(userPhotoURL);
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
@@ -26,13 +28,14 @@ const UserDropdown = ({username,userEamil,userPhotoURL}) => {
 
   return (
     <div className="relative">
-      {userPhotoURL?<img
+      {imgSrc?<img
         id="avatarButton"
         type="button"
         onClick={toggleDropdown}
         className="w-8 h-8 rounded-full cursor-pointer"
-        src={`${userPhotoURL}`}
+        src={`${imgSrc}`}
         alt="User dropdown"
+        onError={()=>setImgSrc("../images/user-profile.jpg")}
       />:<UserIcon className={`w-6 h-6 rounded-full cursor-pointer`} type="button"
       onClick={toggleDropdown}/>}
       {isDropdownOpen && (
@@ -61,6 +64,14 @@ const UserDropdown = ({username,userEamil,userPhotoURL}) => {
               >
                 My Orders
               </a>
+            </li>
+            <li>
+              <Link
+                href="/favorites"
+                className="block px-4 py-2 hover:bg-gray-100"
+              >
+                favorites
+              </Link>
             </li>
           </ul>
           <div className="py-1">
