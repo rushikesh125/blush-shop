@@ -10,7 +10,7 @@ const FavoriteBtn = ({ productId }) => {
   const user = useSelector((state) => state.user);
   // console.log('user:',user);
   const { data } = useUser({ uid: user?.uid });
-  console.log('data:',data);
+  // console.log('data:',data);
   const [isLoading,setIsLoading] = useState(false)
   const handleClick = async () => {
     setIsLoading(true)

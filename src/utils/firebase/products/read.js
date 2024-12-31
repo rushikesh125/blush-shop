@@ -7,6 +7,7 @@ import {
   onSnapshot,
   query,
   startAfter,
+  where,
 } from "firebase/firestore";
 import useSWRSubscription from "swr/subscription";
 
@@ -63,6 +64,37 @@ export function useProduct({ productId }) {
         (snapshot) => {
           next(null,
             snapshot.exists()? snapshot.data():null
+          );
+        },
+        (err) => next(err, null)
+      );
+
+      return () => unsub();
+    }
+  );
+
+  return {
+    data: data,
+    error: error?.message,
+    isLoading: data === undefined,
+  };
+}
+
+
+export function useProductsByIds({ idsList }) {
+  // Subscribe to Firestore collection using SWRSubscription
+  const { data, error } = useSWRSubscription(
+    ["products",idsList], // Key to identify this subscription
+    ([path, idsList], { next }) => {
+      // Define Firestore collection reference
+      const ref = collection(db, path);
+      let q = query(ref, where("id",'in',idsList));
+      // Setup Firestore listener
+      const unsub = onSnapshot(
+        q,
+        (snapshot) => {
+          next(null,
+            snapshot.docs.length === 0 ? [] : snapshot.docs.map(snap=>snap.data())
           );
         },
         (err) => next(err, null)

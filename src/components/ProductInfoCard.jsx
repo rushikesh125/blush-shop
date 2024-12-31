@@ -5,6 +5,7 @@ import ImageSlideshow from "@/components/ImageSlideshow";
 import CustomBtn2 from "./CustomBtn2";
 import HeartIcon from "./SvgIcons/HeartIcon";
 import FavoriteBtn from "./FavoriteBtn";
+import Link from "next/link";
 
 const ProductInfoCard = ({
   id,
@@ -117,10 +118,10 @@ const ProductInfoCard = ({
 
           {/* Buttons */}
           <div className="flex gap-2 items-center">
-            <AddToCartBtn itemId={id} />
-            <button className="text-sm rounded-md px-6 py-3 bg-black text-white">
+            <AddToCartBtn productId={id} quantity={productQuantity} size={selectedSize} color={selectedColor}/>
+            <Link href={`/checkout?type=buynow&productId=${id}&quantity=${productQuantity}&color=${selectedColor}&size=${selectedSize}`} className="text-sm rounded-md px-6 py-3 bg-black text-white">
               Buy Now
-            </button>
+            </Link>
             <FavoriteBtn productId={id}/>
           </div>
         </div>

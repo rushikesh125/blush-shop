@@ -27,14 +27,14 @@ const UserDropdown = ({username,userEamil,userPhotoURL}) => {
   }, [isDropdownOpen]);
 
   return (
-    <div className="relative">
+    <div className="relative mx-2">
       {imgSrc?<img
         id="avatarButton"
         type="button"
         onClick={toggleDropdown}
         className="w-8 h-8 rounded-full cursor-pointer"
-        src={`${imgSrc}`}
-        alt="User dropdown"
+        src={imgSrc}
+        alt="profile-img"
         onError={()=>setImgSrc("../images/user-profile.jpg")}
       />:<UserIcon className={`w-6 h-6 rounded-full cursor-pointer`} type="button"
       onClick={toggleDropdown}/>}
