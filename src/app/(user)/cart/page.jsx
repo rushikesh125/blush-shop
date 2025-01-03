@@ -14,18 +14,15 @@ const CartPage = () => {
     <>
       <div className="px-5 py-5 md:px-10 lg:px-20">
         <h3 className="text-center text-2xl text-accent-color">Cart</h3>
-        <div className="w-full mx-auto  p-2 my-5 md:w-7/12 flex justify-between items-center">
+        <div className="w-full mx-auto  p-2 my-2 md:w-7/12 flex justify-center items-center">
           <Link
             href={`/checkout?type=cart`}
             className="bg-black rounded-md px-2 py-1 text-white"
           >
             Checkout
           </Link>
-          <CustomBtn3 className={`text-red-500 bg-red-100 rounded-md px-2 py-1`}>
-            Clear Cart
-          </CustomBtn3>
         </div>
-        <div className="flex flex-col gap-2 items-center justify-center my-5">
+        <div className="flex flex-col gap-2 items-center justify-center my-2">
           {data?.cart?.length >= 1 ? (
             data?.cart?.map((item) => (
               <CartItem key={item.id} productInfo={item} />

@@ -5,15 +5,36 @@ import toast from "react-hot-toast";
 import UserIcon from "./SvgIcons/UserIcon";
 import Link from "next/link";
 
-const UserDropdown = ({username,userEamil,userPhotoURL}) => {
+const UserDropdown = ({ username, userEamil, userPhotoURL }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState("right-0"); // Default position
-  const [imgSrc,setImgSrc] = useState(userPhotoURL);
+  const [imgSrc, setImgSrc] = useState(userPhotoURL);
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
+
+  const handleClickOutside = (event) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target)
+    ) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isDropdownOpen) {
+      document.addEventListener("click", handleClickOutside);
+    } else {
+      document.removeEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   useEffect(() => {
     if (isDropdownOpen && dropdownRef.current) {
@@ -28,16 +49,23 @@ const UserDropdown = ({username,userEamil,userPhotoURL}) => {
 
   return (
     <div className="relative mx-2">
-      {imgSrc?<img
-        id="avatarButton"
-        type="button"
-        onClick={toggleDropdown}
-        className="w-8 h-8 rounded-full cursor-pointer"
-        src={imgSrc}
-        alt="profile-img"
-        onError={()=>setImgSrc("../images/user-profile.jpg")}
-      />:<UserIcon className={`w-6 h-6 rounded-full cursor-pointer`} type="button"
-      onClick={toggleDropdown}/>}
+      {imgSrc ? (
+        <img
+          id="avatarButton"
+          type="button"
+          onClick={toggleDropdown}
+          className="w-8 h-8 rounded-full cursor-pointer"
+          src={imgSrc}
+          alt="profile-img"
+          onError={() => setImgSrc("../images/user-profile.jpg")}
+        />
+      ) : (
+        <UserIcon
+          className={`w-6 h-6 rounded-full cursor-pointer`}
+          type="button"
+          onClick={toggleDropdown}
+        />
+      )}
       {isDropdownOpen && (
         <div
           id="userDropdown"
@@ -50,18 +78,12 @@ const UserDropdown = ({username,userEamil,userPhotoURL}) => {
           </div>
           <ul className="py-2 text-sm text-gray-700">
             <li>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100"
-              >
+              <a href="#" className="block px-4 py-2 hover:bg-gray-100">
                 My account
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100"
-              >
+              <a href="#" className="block px-4 py-2 hover:bg-gray-100">
                 My Orders
               </a>
             </li>
@@ -76,16 +98,18 @@ const UserDropdown = ({username,userEamil,userPhotoURL}) => {
           </ul>
           <div className="py-1">
             <div
-             onClick={()=>{
-                signOut(auth).then(() => {
-                  toast.success("Logged out")
-                }).catch((error) => {
-                  toast.error(error.message)
-                });
+              onClick={() => {
+                signOut(auth)
+                  .then(() => {
+                    toast.success("Logged out");
+                  })
+                  .catch((error) => {
+                    toast.error(error.message);
+                  });
               }}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
             >
-              Sign out
+              Logout
             </div>
           </div>
         </div>

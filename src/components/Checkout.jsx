@@ -5,9 +5,15 @@ import CustomBtn3 from "./CustomBtn3";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import confetti from "canvas-confetti";
+import { generateRandomId } from "@/utils/utils";
+import { createOrder } from "@/utils/firebase/orders/write";
+import { useSelector } from "react-redux";
 const Checkout = ({ productList }) => {
+  const User = useSelector(state=>state.user)
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const paymentTypes = ['COD']
+  const [paymentMode, setPaymentMode] = useState(["COD"]);
   const [formData, setFormData] = useState({
     fullName: "Aarav Sharma",
     email: "aarav.sharma@example.com",
@@ -16,7 +22,7 @@ const Checkout = ({ productList }) => {
     city: "Mumbai",
     state: "Maharashtra",
     zip: "400001",
-    orderNote: "Please deliver between 10 AM and 5 PM."
+    orderNote: "Please deliver between 10 AM and 5 PM.",
   });
 
   // const [formData, setFormData] = useState({
@@ -29,19 +35,18 @@ const Checkout = ({ productList }) => {
   //   zip: "",
   //   orderNote: "",
   // });
-  
+
   if (!productList.length >= 1) {
     return <div>Products Not Found</div>;
   }
 
   console.log("ProductList:", productList);
+
   const totalPrice = productList.reduce((prev, curr) => {
     return prev + parseInt(curr?.quantity) * parseInt(curr?.product.price);
   }, 0);
-  
 
-
-//    
+  //
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,7 +62,7 @@ const Checkout = ({ productList }) => {
   //     // Add your form submission logic here
   //   };
 
-  const handlePlaceOrder =async (e) => {
+  const handlePlaceOrder = async (e) => {
     e.preventDefault();
     const allFieldsFilled = Object.values(formData).every(
       (value) => value !== ""
@@ -74,10 +79,11 @@ const Checkout = ({ productList }) => {
         throw new Error("Price should be greater than 0");
       }
 
-      await new Promise((res)=>setTimeout(res,2000))
+      // await new Promise((res) => setTimeout(res, 2000));
+      await createOrder({uid:User.uid,productList:productList,address:formData,metaData:{paymentMode:paymentMode,ProductsPrice:totalPrice,isPaid:false,ProductStatus:"Order Placed"}})
       toast.success("Order Placed");
-      confetti();
-      router.push(`/account`)
+      // confetti();
+      router.push(`/codordersuccess`);
     } catch (error) {
       toast.error(error?.message);
     }
@@ -234,12 +240,27 @@ const Checkout = ({ productList }) => {
             </div>
             <div className="w-full flex justify-between">
               <h3 className="font-semibold">Total Price</h3>
-              <h3>&#8377;{totalPrice}</h3>
+              <h3 className="font-semibold">&#8377;{totalPrice}</h3>
             </div>
           </div>
           {/* place order area  */}
           <div className="border rounded-md p-2 flex flex-col gap-2 my-5 md:my-10">
             <div className="text-lg">Payment Mode </div>
+            <div className="flex justify-center items-center">
+              {paymentTypes.map((mode) => (
+                <div key={`${mode}`}>
+                  <input
+                    id={`${mode}`}
+                    type="radio"
+                    name={`paymentMode`}
+                    value={`${mode}`}
+                    onChange={(e) => setPaymentMode(e.target.value)}
+                  />
+                  &nbsp;
+                  <label htmlFor={`${mode}`}>{mode}</label>
+                </div>
+              ))}
+            </div>
             <div className=" text-xs flex items-center ">
               <input type="checkbox" />
               &nbsp; i agree with the
@@ -248,8 +269,8 @@ const Checkout = ({ productList }) => {
               </span>
             </div>
             <CustomBtn3
-            onClick={handlePlaceOrder}
-            isLoading={isLoading}
+              onClick={handlePlaceOrder}
+              isLoading={isLoading}
               className={`bg-black text-white px-2 py-1 rounded-lg w-full hover:bg-slate-800`}
             >
               Place Order

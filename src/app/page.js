@@ -9,7 +9,9 @@ export default async function Home() {
   // console.log(docs);
   console.log();
   
-
+  if(!docs){
+    return <div className="w-screen h-screen flex justify-center items-center">Error Occured Please Try Again</div>
+  }
   return (
     <>
       {/* <div className="text-center">Hello World</div> */}

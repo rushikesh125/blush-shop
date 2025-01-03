@@ -50,7 +50,6 @@ const Navbar = () => {
   return (
     <nav className="sticky z-50 top-0 bg-opacity-55 backdrop-blur-xl border border-b border-gray-800/[0.10] text-black bg-white  sm:px-4 py-3 flex gap-x-2 items-center justify-between">
       <div className="flex  ms-4 sm:ms-6  items-center ">
-        <Drawer />
         <Link href={`/`} className=" mx-1 md:mx-2 ms-4">
           Blush Shop LOGO
         </Link>

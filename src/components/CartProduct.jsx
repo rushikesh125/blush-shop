@@ -25,10 +25,10 @@ const CartProduct = ({ cartInfo }) => {
 
   const handleRemove = async () => {
     setIsRemoving(true);
-    if(confirm("Are you sure ?")) {
+    if (confirm("Are you sure ?")) {
       try {
         const newList = data?.cart?.filter((d) => d.id != id);
-        await updateCart({list:newList,uid:user?.uid});
+        await updateCart({ list: newList, uid: user?.uid });
         toast.success("Product Removed from Cart");
       } catch (error) {
         toast.error(error?.message);
@@ -43,15 +43,19 @@ const CartProduct = ({ cartInfo }) => {
         <div className="md:p-5 flex flex-row-reverse items-center">
           <div className="w-1/3">
             {selectedProductColor[0]?.url && (
-              <img
-                src={`${selectedProductColor[0]?.url}`}
-                alt="Product-img"
-                className=""
-              />
+              <Link href={`/product/${id}`}>
+                <img
+                  src={`${selectedProductColor[0]?.url}`}
+                  alt="Product-img"
+                  className=""
+                />
+              </Link>
             )}
           </div>
           <div className="w-2/3 p-1 flex flex-col md:gap-1">
-            <h2 className="font-semibold md:text-xl">{productname}</h2>
+            <h2 className="font-semibold md:text-xl">
+              <Link href={`/product/${id}`}>{productname}</Link>
+            </h2>
             <p className="text-xs text-gray-600 line-clamp-2">{description}</p>
             <p className="text-xs">
               Selected Size :
@@ -75,11 +79,18 @@ const CartProduct = ({ cartInfo }) => {
           </div>
         </div>
         <div className="w-full flex justify-center items-center gap-2">
-          <CustomBtn3 isLoading={isRemoving} onClick={handleRemove} className="text-xs inline-flex font-semibold text-red-500 bg-red-100 rounded-md cursor-pointer items-center justify-center px-2 py-1">
+          <CustomBtn3
+            isLoading={isRemoving}
+            onClick={handleRemove}
+            className="text-xs inline-flex font-semibold text-red-500 bg-red-100 rounded-md cursor-pointer items-center justify-center px-2 py-1"
+          >
             <TrashIcon />
             Remove
           </CustomBtn3>
-          <Link href={`/checkout?type=buynow&productId=${id}`} className="text-xs inline-flex text-white bg-black rounded-md cursor-pointer items-center justify-center px-2 py-1">
+          <Link
+            href={`/checkout?type=buynow&productId=${id}`}
+            className="text-xs inline-flex text-white bg-black rounded-md cursor-pointer items-center justify-center px-2 py-1"
+          >
             Place Order
           </Link>
         </div>
