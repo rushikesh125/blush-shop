@@ -4,8 +4,8 @@ import { useState } from "react";
 import CustomBtn3 from "./CustomBtn3";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import confetti from "canvas-confetti";
-import { generateRandomId } from "@/utils/utils";
+// import confetti from "canvas-confetti";
+// import { generateRandomId } from "@/utils/utils";
 import { createOrder } from "@/utils/firebase/orders/write";
 import { useSelector } from "react-redux";
 const Checkout = ({ productList }) => {
@@ -13,7 +13,7 @@ const Checkout = ({ productList }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const paymentTypes = ['COD']
-  const [paymentMode, setPaymentMode] = useState(["COD"]);
+  const [paymentMode, setPaymentMode] = useState(null);
   const [formData, setFormData] = useState({
     fullName: "Aarav Sharma",
     email: "aarav.sharma@example.com",
@@ -78,7 +78,9 @@ const Checkout = ({ productList }) => {
       if (totalPrice <= 0) {
         throw new Error("Price should be greater than 0");
       }
-
+      if(!paymentMode ){
+        throw new Error("Please select Payment mode");
+      }
       // await new Promise((res) => setTimeout(res, 2000));
       await createOrder({uid:User.uid,productList:productList,address:formData,metaData:{paymentMode:paymentMode,ProductsPrice:totalPrice,isPaid:false,ProductStatus:"Order Placed"}})
       toast.success("Order Placed");

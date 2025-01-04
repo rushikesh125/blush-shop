@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 const FavoritesPage = () => {
     const user = useSelector(state=>state.user);
+    console.log('user:',user);
     const {data,isLoading} = useUser({uid:user?.uid})
     if(isLoading){
       return <div className="w-screen h-screen flex justify-center items-center">loading...</div>

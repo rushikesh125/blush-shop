@@ -83,9 +83,9 @@ const UserDropdown = ({ username, userEamil, userPhotoURL }) => {
               </a>
             </li>
             <li>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100">
+              <Link href="/orders" className="block px-4 py-2 hover:bg-gray-100">
                 My Orders
-              </a>
+              </Link>
             </li>
             <li>
               <Link

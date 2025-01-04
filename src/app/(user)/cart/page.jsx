@@ -14,21 +14,30 @@ const CartPage = () => {
     <>
       <div className="px-5 py-5 md:px-10 lg:px-20">
         <h3 className="text-center text-2xl text-accent-color">Cart</h3>
-        <div className="w-full mx-auto  p-2 my-2 md:w-7/12 flex justify-center items-center">
-          <Link
-            href={`/checkout?type=cart`}
-            className="bg-black rounded-md px-2 py-1 text-white"
-          >
-            Checkout
-          </Link>
-        </div>
+        {!data?.cart || data?.cart.length === 0 ? (
+          ""
+        ) : (
+          <div className="w-full mx-auto  p-2 my-2 md:w-7/12 flex justify-center items-center">
+            <Link
+              href={`/checkout?type=cart`}
+              className="bg-black rounded-md px-2 py-1 text-white"
+            >
+              Checkout
+            </Link>
+          </div>
+        )}
         <div className="flex flex-col gap-2 items-center justify-center my-2">
           {data?.cart?.length >= 1 ? (
             data?.cart?.map((item) => (
               <CartItem key={item.id} productInfo={item} />
             ))
           ) : (
-            <div className="text-accent-color text-xl">No Items in Cart</div>
+            <div className="w-full my-10">
+              <div className="w-full md:w-1/2 mx-auto flex justify-center items-center">
+              <img src="/svg/no-orders.svg" alt="no-items-in-cart" className="w-52" />
+              </div>
+              <div className="text-accent-color text-xl text-center">No Items in Cart</div>
+              </div>
           )}
         </div>
       </div>
