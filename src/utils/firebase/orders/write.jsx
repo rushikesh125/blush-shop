@@ -11,6 +11,7 @@ export const createOrder =async({uid,productList,address,metaData})=>{
         productList,
         address,
         metaData,
+        orderId:OrderId,
         "createdAt":Timestamp.now()
     })
 }

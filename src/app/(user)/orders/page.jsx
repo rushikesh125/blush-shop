@@ -33,11 +33,11 @@ const Orders = () => {
             <div className="w-full md:w-1/2 mx-auto flex justify-center items-center">
               <img src="/svg/no-orders.svg" alt="no-orders" className="w-52" />
             </div>
-            <h3 className="text-xl text-center">You have no Orders</h3>
+            <h3 className="text-xl text-center text-accent-color">You have no Orders</h3>
           </div>
         )}
         <div className="mx-auto w-full md:w-9/12 lg:w-7/12 my-5 flex flex-col gap-2">
-          {orders.map((item, index) => (
+          { orders && orders.map((item, index) => (
             <div key={index} className="w-full border-y my-3 py-2">
               <div className="text-xs py-1 text-slate-500">
                 {item?.createdAt.toDate().toLocaleString()}
@@ -59,7 +59,9 @@ const Orders = () => {
                   {item?.metaData?.ProductStatus}
                 </span>
               </div>
-              
+              <div className="mx-5 my-2 font-semibold text-xl">
+              &#8377;{item.metaData?.ProductsPrice} /-
+              </div>
 
               <div>
                 {item.productList.map((pro) => (
