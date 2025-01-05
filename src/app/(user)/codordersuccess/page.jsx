@@ -18,7 +18,7 @@ const CodOrderSuccess = () => {
           <span className="text-accent-color-dark font-bold">Successfully</span>
         </div>
         <div>
-          <Link href={`/`} className="rounded-md px-2 py-1 bg-slate-100 hover:bg-slate-200 ">View Orders</Link>
+          <Link href={`/orders`} className="rounded-md px-2 py-1 bg-slate-100 hover:bg-slate-200 ">View Orders</Link>
         </div>
       </div>
     </>
