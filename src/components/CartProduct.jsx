@@ -87,12 +87,12 @@ const CartProduct = ({ cartInfo }) => {
             <TrashIcon />
             Remove
           </CustomBtn3>
-          <Link
+          {/* <Link
             href={`/checkout?type=buynow&productId=${id}`}
             className="text-xs inline-flex text-white bg-black rounded-md cursor-pointer items-center justify-center px-2 py-1"
           >
             Place Order
-          </Link>
+          </Link> */}
         </div>
       </div>
     </>

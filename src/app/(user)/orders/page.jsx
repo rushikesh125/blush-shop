@@ -38,8 +38,11 @@ const Orders = () => {
         )}
         <div className="mx-auto w-full md:w-9/12 lg:w-7/12 my-5 flex flex-col gap-2">
           {orders.map((item, index) => (
-            <div key={index} className="w-full border-b my-2 py-1">
-              <div className="flex items-center justify-end">
+            <div key={index} className="w-full border-y my-3 py-2">
+              <div className="text-xs py-1 text-slate-500">
+                {item?.createdAt.toDate().toLocaleString()}
+              </div>
+              <div className="flex items-center justify-start">
                 <span className="bg-gray-200 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full ">
                   {item.metaData?.paymentMode}
                 </span>
@@ -56,21 +59,19 @@ const Orders = () => {
                   {item?.metaData?.ProductStatus}
                 </span>
               </div>
-              <div className="text-xs mx-4 py-1 text-slate-500">
-                {item?.createdAt.toDate().toLocaleString()}
-              </div>
+              
 
               <div>
                 {item.productList.map((pro) => (
-                  <div key={pro.id} className="my-1 flex items-center">
-                    <div className="w-2/12 flex items-center justify-center">
+                  <div key={pro.id} className="my-4 flex items-center">
+                    <div className="w-3/12 md:w-2/12 flex items-center justify-center">
                       <img
                         src={`${pro.color[0].url}`}
                         alt="product-img"
-                        className="w-20"
+                        className="w-28"
                       />
                     </div>
-                    <div className="w-10/12">
+                    <div className="w-9/12 md:w-10/12">
                       <Link
                         href={`/product/${pro.product.id}`}
                         className="text-lg hover:underline"
@@ -97,13 +98,13 @@ const Orders = () => {
                 ))}
               </div>
 
-              <div className="flex items-center justify-evenly gap-1">
+              <div className="flex items-center justify-evenly gap-5 ">
                 <CustomBtn3
                   className={`text-red-700 bg-red-200 px-3 rounded-md hover:bg-red-300`}
                 >
                 <TrashIcon/>  Cancle
                 </CustomBtn3>
-                <div className="text-sm text-slate-600">
+                <div className="text-xs text-slate-600">
                   {item.address?.address}&nbsp;
                   {item.address?.city}&nbsp;
                   {item.address.state}&nbsp;
