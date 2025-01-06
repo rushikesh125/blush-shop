@@ -13,7 +13,7 @@ import useSWRSubscription from "swr/subscription";
 export function useUser({ uid }) {
   // Subscribe to Firestore collection using SWRSubscription
   const { data, error } = useSWRSubscription(
-    ["user", uid], // Key to identify this subscription
+    ["users", uid], // Key to identify this subscription
     ([path, uid], { next }) => {
       // Define Firestore collection reference
       const ref = doc(db, `users/${uid}`);
