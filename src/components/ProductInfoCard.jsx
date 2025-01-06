@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddToCartBtn from "./AddToCartBtn";
 import ImageSlideshow from "@/components/ImageSlideshow";
 import CustomBtn2 from "./CustomBtn2";
@@ -8,6 +8,10 @@ import FavoriteBtn from "./FavoriteBtn";
 import Link from "next/link";
 import AddReview from "./AddReview";
 import ShowReviews from "./ShowReviews";
+import { Rating } from "@mui/material";
+import { getProductReviewCounts } from "@/utils/firebase/products/read_server";
+import { useProductReviewCounts } from "@/utils/firebase/products/read";
+import Loading from "@/app/loading";
 
 const ProductInfoCard = ({
   id,
@@ -43,6 +47,7 @@ const ProductInfoCard = ({
           <div className="w-full sm:w-1/2 p-4 sm:flex flex-col justify-center">
             <h3 className="font-semibold text-3xl my-2">{productname}</h3>
             <p className="text-gray-700 my-2">{description}</p>
+            <TotalReviews productId={id}/>
             <p className="text-2xl my-2">&#8377;{price}</p>
 
             {/* Color Selection */}
@@ -147,3 +152,34 @@ const ProductInfoCard = ({
 };
 
 export default ProductInfoCard;
+
+const TotalReviews = ({ productId }) => {
+  const { data: counts, error, isLoading } = useProductReviewCounts({ productId });
+  const [rating, setRating] = useState(null);
+  // Use useEffect outside of conditionals to ensure hooks are always called in the same order
+  useEffect(() => {
+    if (counts) {
+      setRating(counts.averageRating);
+    }
+  }, [counts]); // Dependency array ensures the effect runs only when 'counts' changes
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>;
+  }
+
+
+  return (
+    <>
+      {counts && (
+        <div className="w-full flex items-center gap-2">
+          <Rating size="small" readOnly defaultValue={5} value={rating} />
+          <h3 className="text-sm text-gray-500">{counts.totalReviews} Reviews</h3>
+        </div>
+      )}
+    </>
+  );
+};

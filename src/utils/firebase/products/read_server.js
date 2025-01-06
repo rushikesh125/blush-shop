@@ -1,6 +1,8 @@
 import {
+  average,
   collection,
   doc,
+  getAggregateFromServer,
   getDoc,
   getDocs,
   limit,
@@ -122,3 +124,13 @@ export const getProductsByCategory = async ({ id }) => {
     // toast.error(error?.message);
   }
 };
+
+
+export const getProductReviewCounts = async ({productId})=>{
+  const ref = collection(db,`products/${productId}/reviews`);
+  const data = await getAggregateFromServer(ref,{
+    totalReviews:count(),
+    averageRating:average("rating")
+  })
+  return data.data();
+}

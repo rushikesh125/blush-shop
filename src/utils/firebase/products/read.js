@@ -110,3 +110,43 @@ export function useProductsByIds({ idsList }) {
     isLoading: data === undefined,
   };
 }
+
+
+export function useProductReviewCounts({ productId }) {
+  // Subscribe to Firestore collection using SWRSubscription
+  const { data, error } = useSWRSubscription(
+    ["productReviews", productId], // Key to identify this subscription
+    ([path, productId], { next }) => {
+      // Define Firestore collection reference
+      const ref = collection(db, `products/${productId}/reviews`);
+      const reviewsQuery = query(ref);
+
+      // Setup Firestore listener
+      const unsub = onSnapshot(
+        reviewsQuery,
+        (snapshot) => {
+          if (snapshot.empty) {
+            next(null, { totalReviews: 0, averageRating: 0 });
+          } else {
+            const totalReviews = snapshot.size;
+            const averageRating = snapshot.docs.reduce(
+              (acc, doc) => acc + doc.data().rating,
+              0
+            ) / totalReviews;
+
+            next(null, { totalReviews, averageRating });
+          }
+        },
+        (err) => next(err, null)
+      );
+
+      return () => unsub(); // Cleanup the listener
+    }
+  );
+
+  return {
+    data: data,
+    error: error?.message,
+    isLoading: data === undefined,
+  };
+}
