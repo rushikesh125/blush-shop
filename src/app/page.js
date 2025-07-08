@@ -20,7 +20,7 @@ export default async function Home() {
       </div>
       <CaretUpIcon />
       <div className="px-5 py-5 md:px-10 lg:px-20 md:pb-10">
-        <div className="poster-area w-full">
+        <div className="poster-area w-full aspect-video">
           <img
             src={bannerImg}
             alt="banner-img"
