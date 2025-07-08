@@ -19,7 +19,7 @@ const CartProduct = ({ cartInfo }) => {
     category,
     description,
     selectedQuantity,
-    selectedProductColor,
+    selectedProductColor = [],
     selectedSize,
   } = cartInfo;
 
@@ -42,7 +42,7 @@ const CartProduct = ({ cartInfo }) => {
       <div className="w-full md:w-9/12 lg:w-7/12 border-b py-2">
         <div className="md:p-5 flex flex-row-reverse items-center">
           <div className="w-1/3">
-            {selectedProductColor[0]?.url && (
+            {selectedProductColor?.length >=0 && selectedProductColor[0]?.url && (
               <Link href={`/product/${id}`}>
                 <img
                   src={`${selectedProductColor[0]?.url}`}
